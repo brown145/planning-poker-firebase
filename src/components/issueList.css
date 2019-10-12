@@ -1,0 +1,32 @@
+.issueList .ant-list-item {
+  padding: 8px;
+}
+
+.listEnd.ant-divider-horizontal {
+  margin: 2px 0;
+}
+
+
+.InactiveIssue .ant-statistic {
+  padding-left: 2em;
+}
+
+.InactiveIssue .ant-statistic-title {
+  font-size: 10px;
+}
+
+.InactiveIssue .ant-statistic-content {
+  font-size: 14px;
+  color: #333;
+}
+
+.InactiveIssue .ant-statistic-content-value-decimal {
+  font-size: 12px;
+}
+
+.InactiveIssue .ant-tag {
+  background-color: #f5f5f5;
+}
+.InactiveIssue .ant-tag.modeTag {
+  background-color: #eaff8f;
+}

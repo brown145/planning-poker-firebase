@@ -1,0 +1,20 @@
+.ant-list.userList {
+  padding: 0 8px;
+}
+
+.userList.ant-list-split .ant-list-item {
+  border-bottom: none;
+}
+
+.userList .ant-avatar {
+  margin-right: 4px;
+}
+
+.currentUser {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.currentUser .ant-avatar {
+  background: #a0d911;
+}

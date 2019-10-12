@@ -1,0 +1,12 @@
+.foot {
+  font-weight: 100;
+  font-size: 11px;
+  color: #bfbfbf;
+  text-align: right;
+}
+
+.foot button {
+  font-size: 100%;
+  padding: 0;
+  margin: 0;
+}
