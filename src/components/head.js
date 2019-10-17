@@ -1,9 +1,10 @@
-import React from 'react';
-import { Col, Row } from 'antd';
-import { ReactComponent as Logo } from '../svg/logo.svg';
 import './head.css';
 
+import { Col, Row } from 'antd';
+
 import Login from '../components/login';
+import { ReactComponent as Logo } from '../svg/logo.svg';
+import React from 'react';
 
 function Head() {
   return (

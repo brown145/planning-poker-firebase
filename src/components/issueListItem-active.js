@@ -1,25 +1,26 @@
-import React, { useContext, useState } from 'react';
-import { BidContext } from '../providers/BidProvider';
-import { RoomContext } from '../providers/RoomProvider';
-import { Button, Col, List, Row, Tag, Typography } from 'antd';
+import { Button, Col, List, Row, Tag, Typography } from "antd";
+import React, { useContext, useState } from "react";
+
+import { BidContext } from "../providers/BidProvider";
+import { RoomContext } from "../providers/RoomProvider";
 
 const { Text } = Typography;
 
 function ActiveItem({ item, readOnly }) {
-  const [ bid, setBid ] = useState(NaN);
+  const [bid, setBid] = useState(NaN);
   const { bidIssue } = useContext(BidContext);
   const { closeIssue } = useContext(RoomContext);
 
-  const handleClose = (event) => {
+  const handleClose = event => {
     closeIssue({ id: item.id });
-  }
+  };
 
-  const handleBid = (event) => {
+  const handleBid = event => {
     const { value } = event.target;
     setBid(value);
 
     bidIssue({ bidValue: value });
-  }
+  };
 
   const renderBidder = () => (
     <Button.Group onClick={handleBid}>
@@ -33,13 +34,11 @@ function ActiveItem({ item, readOnly }) {
     </Button.Group>
   );
 
-  const renderBid = () => (
-    <Tag>{bid}</Tag>
-  );
+  const renderBid = () => <Tag>{bid}</Tag>;
 
   const renderContent = () => {
     if (readOnly) {
-      return '';
+      return "";
     }
 
     if (bid) {
@@ -47,21 +46,25 @@ function ActiveItem({ item, readOnly }) {
     }
 
     return renderBidder();
-  }
+  };
 
   return (
     <List.Item>
-      <Row type="flex" align="middle" style={{width: '100%'}}>
-        <Col sm={24} md={8}>
-          <Text strong underline>{item.name}</Text>
+      <Row type="flex" align="middle" style={{ width: "100%" }}>
+        <Col xs={24} sm={24} md={8}>
+          <Text strong underline>
+            {item.name}
+          </Text>
         </Col>
-        <Col sm={24} md={16}>
-            <Row type="flex" justify="end" gutter={2}>
-              <Col>{renderContent()}</Col>
-              {!readOnly &&
-                <Col><Button onClick={handleClose}>Close</Button></Col>
-              }
-            </Row>
+        <Col xs={24} sm={24} md={16}>
+          <Row type="flex" justify="end" gutter={2}>
+            <Col>{renderContent()}</Col>
+            {!readOnly && (
+              <Col>
+                <Button onClick={handleClose}>Close</Button>
+              </Col>
+            )}
+          </Row>
         </Col>
       </Row>
     </List.Item>

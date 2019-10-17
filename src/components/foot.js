@@ -1,6 +1,8 @@
-import React from 'react';
-import { Button, Col, Row, Typography } from 'antd';
 import './foot.css';
+
+import { Button, Col, Row, Typography } from 'antd';
+
+import React from 'react';
 
 const { Text } = Typography;
 

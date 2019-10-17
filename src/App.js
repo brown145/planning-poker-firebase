@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Drawer, Layout } from 'antd';
+import './App.css';
 
+import { Drawer, Layout } from 'antd';
+import React, { useState } from 'react';
+
+import Foot from './components/foot';
 import Head from './components/head';
+import IssueList from './components/issueList';
 import Subhead from './components/subhead';
 import UserList from './components/userList';
-import IssueList from './components/issueList';
-import Foot from './components/foot';
 import isNarrow from './utility/isNarrow';
-import './App.css';
 
 const { Header, Sider, Footer, Content } = Layout;
 
@@ -27,7 +28,7 @@ function App() {
   );
 
   const renderSubHeader = () => (isMobileView) ? (
-    <Subhead
+     <Subhead
       onOpenStateChange={setSideOpenState}
     />
   ) : null;
@@ -54,24 +55,24 @@ function App() {
   );
 
   return (
-   <Layout className="appMain">
-    <Header>
-      <Head />
-    </Header>
-    {renderSubHeader()}
-    <Layout className="appBody">
-      {renderSide()}
-      <Content className="appContent">
-        <IssueList />
-      </Content>
+    <Layout className="appMain">
+      <Header>
+        <Head />
+      </Header>
+      {renderSubHeader()}
+      <Layout className="appBody">
+        {renderSide()}
+        <Content className="appContent">
+          <IssueList />
+        </Content>
+      </Layout>
+      <Footer>
+        <Foot
+          onMobileViewChange={toggleMobileView}
+          isMobileView={isMobileView}
+        />
+      </Footer>
     </Layout>
-    <Footer>
-      <Foot
-        onMobileViewChange={toggleMobileView}
-        isMobileView={isMobileView}
-      />
-    </Footer>
-   </Layout>
   );
 }
 
