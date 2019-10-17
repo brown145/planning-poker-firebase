@@ -1,5 +1,5 @@
 .head,
-.head>div {
+.head > div {
   height: 64px;
 }
 
@@ -10,6 +10,7 @@
 }
 
 .head h1 {
+  color: #eaff8f;
   height: 64px;
   margin: 0;
   font-weight: 200;

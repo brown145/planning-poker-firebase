@@ -1,58 +1,65 @@
-import './App.css';
+import "./App.css";
 
-import { Drawer, Layout } from 'antd';
-import React, { useState } from 'react';
+import { Drawer, Layout, Modal } from "antd";
+import React, { useEffect, useState } from "react";
 
-import Foot from './components/foot';
-import Head from './components/head';
-import IssueList from './components/issueList';
-import Subhead from './components/subhead';
-import UserList from './components/userList';
-import isNarrow from './utility/isNarrow';
+import Foot from "./components/foot";
+import Head from "./components/head";
+import IssueList from "./components/issueList";
+import Subhead from "./components/subhead";
+import UserList from "./components/userList";
+import isMobile from "ismobilejs";
 
 const { Header, Sider, Footer, Content } = Layout;
+const { confirm } = Modal;
+
+const probablyMobile = isMobile(window.navigator.userAgent).any;
+
+const goFullscreen = () => window.document.body.requestFullscreen();
 
 function App() {
-  const [isMobileView, setIsMobileView] = useState(isNarrow());
-  const [sideOpenState, setSideOpenState] = useState(!isNarrow());
+  const [isMobileView, setIsMobileView] = useState(probablyMobile);
+  const [sideOpenState, setSideOpenState] = useState(!probablyMobile);
 
-  const toggleMobileView = () => setIsMobileView(!isMobileView);
+  useEffect(() => {
+    if (isMobileView) {
+      confirm({
+        title: "View in fullscreen mode",
+        icon: "fullscreen",
+        onOk: goFullscreen,
+        onCancel: () => {}
+      });
+    }
+  }, [isMobileView]);
 
-  const toggleSideOpenState = () =>
-    setSideOpenState(!sideOpenState);
+  const toggleMobileView = () => {
+    setIsMobileView(!isMobileView);
+    setSideOpenState(isMobileView);
+  };
 
-  const renderUserList = () => (
-    <UserList
-      showDetails={sideOpenState}
-    />
-  );
+  const toggleSideOpenState = () => setSideOpenState(!sideOpenState);
 
-  const renderSubHeader = () => (isMobileView) ? (
-     <Subhead
-      onOpenStateChange={setSideOpenState}
-    />
-  ) : null;
+  const renderUserList = isSideOpen => <UserList showDetails={isSideOpen} />;
 
-  const renderSide = () => (isMobileView) ? (
-    <Drawer
-      title="Room Members"
-      placement="left"
-      closable={true}
-      onClose={toggleSideOpenState}
-      visible={sideOpenState}
-    >
-      {renderUserList()}
-    </Drawer>
-  ) : (
-    <Sider
-      theme={'light'}
-      collapsed={false}
-      width={160}
-      collapsedWidth={40}
-    >
-      {renderUserList()}
-    </Sider>
-  );
+  const renderSubHeader = () =>
+    isMobileView ? <Subhead onOpenStateChange={setSideOpenState} /> : null;
+
+  const renderSide = () =>
+    isMobileView ? (
+      <Drawer
+        title="Room Members"
+        placement="left"
+        closable={true}
+        onClose={toggleSideOpenState}
+        visible={sideOpenState}
+      >
+        {renderUserList(sideOpenState)}
+      </Drawer>
+    ) : (
+      <Sider theme={"light"} collapsed={false} width={160} collapsedWidth={40}>
+        {renderUserList(true)}
+      </Sider>
+    );
 
   return (
     <Layout className="appMain">
