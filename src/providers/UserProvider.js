@@ -7,11 +7,14 @@ const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    return auth.onAuthStateChanged(({ uid: id, displayName }) =>
-      setUser({ id, displayName })
-    );
-
-    // return auth.onAuthStateChanged(({ uid: id, displayName }) => console.log('!!!', id, displayName))
+    return auth.onAuthStateChanged((authResult) => {
+      if (authResult) {
+        const { uid: id, displayName } = authResult;
+        setUser({ id, displayName });
+      } else {
+        setUser(null);
+      }
+    });
   }, []);
 
   return (

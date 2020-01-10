@@ -7,8 +7,7 @@ import './userList.css';
 
 function UserList({showDetails}) {
   const { roomMembers, exitRoom } = useContext(MembershipContext);
-  const { user } = useContext(UserContext);
-  const currentMember = user;
+  const { user: currentMember } = useContext(UserContext);
   const isLoading = roomMembers.length === 0;
 
   const renderActions = forUser => (showDetails) ? (
@@ -20,7 +19,7 @@ function UserList({showDetails}) {
     />
   ) : null;
 
-  return (roomMembers.length) ? (
+  return (currentMember) ? (
     <List
       className='userList'
       dataSource={roomMembers.sort()}
